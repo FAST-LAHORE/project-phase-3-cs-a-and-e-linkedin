@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectl164387;
+package jtableexp;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Muntaha
+ * @author KHAWAJA ZEESHAUR
  */
+
 public class user {
-      String username;
+    
+    String username;
     String password;
     String name;
     String email;
@@ -20,9 +24,8 @@ public class user {
     String profession;
     String website; 
     int salary;
-    //savedLibrary s1 = new savedLibrary();
-    Career_Interests career;
-    
+    SavedLib s1= new SavedLib();;
+    ArrayList<job> AppliedJobs = new ArrayList();
     
     private static user u = new user();
     private user(){};
@@ -47,11 +50,5 @@ public class user {
     public String getUsername(){
         return username;
     }
-    public void addCareer(Career_Interests c){
-        this.career=Career_Interests.getInstance();
-    }
-    public Career_Interests getCareer(){
-        return this.career;
-    }
-    
+   
 }
