@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project;
+package project3;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,17 +16,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static project.userlogin.myobj;
-import static project.userlogin.myres;
-import static project.userlogin.mystat;
-import static project.userlogin.querypost;
-import static project.userlogin.sqlstat;
+import static project3.ViewJobs.myconobj;
+import static project3.ViewJobs.myresobj;
+import static project3.ViewJobs.mystatobj;
+//import static project.userlogin.myobj;
+//import static project.userlogin.myres;
+//import static project.userlogin.mystat;
+//import static project.userlogin.querypost;
+//import static project.userlogin.sqlstat;
 
 /**
  *
  * @author Dell
  */
 public class functionality extends javax.swing.JFrame {
+    private user u;
+    
 
     /**
      * Creates new form functionality
@@ -34,14 +40,10 @@ public class functionality extends javax.swing.JFrame {
         initComponents();
     }
     
-    public functionality(Connection myobj,Statement mystat,ResultSet myres,PreparedStatement sqlstat,User_Account u) {
+    public functionality(user u) {
        
         initComponents();
-        this.myobj=myobj;
-        this.mystat=mystat;
-        this.myres=myres;
-        this.sqlstat=sqlstat;
-        user=u;
+        this.u = u;
 //        jTable1.setVisible(false);
     }
 
@@ -56,14 +58,6 @@ public class functionality extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         sendmsg = new javax.swing.JButton();
         jusermsg = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -75,10 +69,6 @@ public class functionality extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,58 +84,6 @@ public class functionality extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("Post a Video");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Post an image");
-
-        jButton3.setText("Post a status");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Friends");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Show Posts");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Username", "PID", "Post"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-        }
 
         sendmsg.setText("Send Message");
         sendmsg.addActionListener(new java.awt.event.ActionListener() {
@@ -214,181 +152,70 @@ public class functionality extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable4);
 
-        jButton7.setText("View Profile");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setText("Messages");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Posts");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("BACK");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                        .addGap(458, 458, 458))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton10)
-                        .addGap(28, 28, 28))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jusermsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jmsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(sendmsg)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(209, 209, 209))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jshow)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(sendmsg)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jshow)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jusermsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jmsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(90, 90, 90)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButton7)
-                .addGap(74, 74, 74)
-                .addComponent(jButton8)
-                .addGap(69, 69, 69)
-                .addComponent(jButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton5)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jusermsg)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jmsg)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(1, 1, 1)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jusermsg)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jmsg)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(sendmsg)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jshow))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jButton6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jshow)
+                            .addComponent(jButton6))
+                        .addGap(56, 56, 56)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
-                .addContainerGap(226, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        friends f1=new friends(myobj,mystat,myres,sqlstat);
-        f1.setVisible(true);
-        
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        //status
-//        
-        user=user.getUser();
-        System.out.println(user.getName());
-        
-        String n=jTextField1.getText();
-        if(n.length()!= 0)
-            try {
-                    addpostdb(n);
-        } catch (SQLException ex) {
-            Logger.getLogger(userlogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-//     
-//        
-//        user.showposts();
-        
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     public void addmessage(String send,String m,String rec) throws SQLException
     {
-        sqlstat = myobj.prepareStatement("INSERT INTO IRTAZA.MESSAGE(SENDER,MESSAGE,RECEIVER) VALUES(?,?,?)");
+        System.out.println(rec + m);
+        sqlstat = myconobj.prepareStatement("INSERT INTO IRTAZA.MESSAGE(SENDER,MESSAGE,RECEIVER) VALUES(?,?,?)");
+        System.out.println(rec + m);
 //        myres=mystat.executeQuery(querypost);        
         
 //        System.out.println("IDDDD"+id);
@@ -403,92 +230,58 @@ public class functionality extends javax.swing.JFrame {
     }
     
     
-    public void addpostdb(String n) throws SQLException
-    {
-                //System.out.println("entered function");
-        sqlstat = myobj.prepareStatement("INSERT INTO IRTAZA.POSTS(ID,USERNAME,PID,POST) VALUES(?,?,?,?)");
-        myres=mystat.executeQuery(querypost);        
-        int id=0;
-        while(myres.next()){
-               id=myres.getInt("ID");
-            }
-        id++;
-        System.out.println("IDDDD"+id);
-        
-        sqlstat.setInt(1,id);
-         sqlstat.setString(2,user.getuserName());
-         sqlstat.setInt(3, id);
-         sqlstat.setString(4,n);
-         
-         
-         int a = sqlstat.executeUpdate();
-         
-             
 
-            
-    }
     
     
-    public void showposts()
-    {
-        try {
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-               // System.out.println("entered function");
-//                String qu="Delete from IRATZAFAYAZ.UNTITLED where id="+id;
-                 myres=mystat.executeQuery(querypost);
-            int j=0;
-            while(myres.next()){
-               int id=myres.getInt("ID");
-               String name= myres.getString("username");
-               int pid = myres.getInt("pid");
-               String post = myres.getString("post");
-                System.out.println(id+name+pid+post);
-                
-                
-//                jTable1.setValueAt(id, j, 0);
-//                jTable1.setValueAt(name, j, 1);
-//                jTable1.setValueAt(pid, j, 2);
-//                jTable1.setValueAt(post, j, 3);
-                
-                model.addRow(new Object[]{id,name,pid,post});
-                
-                
-                
-                j++;
-                
-            }
-        }
-                
- 
-             catch (SQLException ex) {
-                Logger.getLogger(userlogin.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("error");
-            }
-    }
+//    public void showposts()
+//    {
+//        try {
+//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//                model.setRowCount(0);
+//               // System.out.println("entered function");
+////                String qu="Delete from IRATZAFAYAZ.UNTITLED where id="+id;
+//                 myres=mystat.executeQuery(querypost);
+//            int j=0;
+//            while(myres.next()){
+//               int id=myres.getInt("ID");
+//               String name= myres.getString("username");
+//               int pid = myres.getInt("pid");
+//               String post = myres.getString("post");
+//                System.out.println(id+name+pid+post);
+//                
+//                
+////                jTable1.setValueAt(id, j, 0);
+////                jTable1.setValueAt(name, j, 1);
+////                jTable1.setValueAt(pid, j, 2);
+////                jTable1.setValueAt(post, j, 3);
+//                
+//                model.addRow(new Object[]{id,name,pid,post});
+//                
+//                
+//                
+//                j++;
+//                
+//            }
+//        }
+//                
+// 
+//             catch (SQLException ex) {
+//                Logger.getLogger(userlogin.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println("error");
+//            }
+//    }
     
     
    
     
     
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        jTable1.setVisible(true);
-                showposts();
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void sendmsgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendmsgActionPerformed
         // TODO add your handling code here:
         
         String msg=jTextField3.getText();
         String usermsg=jTextField2.getText();
-        
+        System.out.println(msg + usermsg);
         if(msg.length()==0)
         {
             JOptionPane.showMessageDialog(this, "Why do you want to send an empty message? eh?");
@@ -499,10 +292,11 @@ public class functionality extends javax.swing.JFrame {
         }
         else
         {
-            user.addmessage(msg, usermsg);
-            
+            u.addmessage(msg, usermsg);
+            System.out.println(msg + usermsg);
             try {
-                addmessage(user.getuserName(),msg,usermsg);
+                addmessage(u.getuserName(),msg,usermsg);
+                System.out.println(msg + usermsg);
             } catch (SQLException ex) {
                 Logger.getLogger(functionality.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -525,7 +319,7 @@ public class functionality extends javax.swing.JFrame {
         
         ArrayList<Message> msgs;
         try {
-            msgs = user.showsend();
+            msgs = u.showsend();
             String m,u;
         System.out.println(msgs.size());
         for(int i=0;i<msgs.size();i++)
@@ -575,36 +369,6 @@ public class functionality extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        this.hide();
-        view v=new view(myobj,mystat,myres,sqlstat,user);
-        v.setVisible(true);
-        
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        this.hide();
-        messages m=new  messages(myobj,mystat,myres,sqlstat,user);
-        m.setVisible(true);
-        
-        
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        
-         this.hide();
-        postsform m=new  postsform(myobj,mystat,myres,sqlstat,user);
-        m.setVisible(true);
-        
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
-
     
     
     /**
@@ -641,34 +405,21 @@ public class functionality extends javax.swing.JFrame {
             }
         });
     }
-        public static Connection myobj;
-        public static Statement mystat=null;
-        public static ResultSet myres=null;
+        public static Connection myconobj;
+        public static Statement mystatobj=null;
+        public static ResultSet myresobj=null;
         public static String query1=null;
-        public static String queryusers="select * from IRTAZA.USERS";
+        public static String queryusers="select * from users";
         public static PreparedStatement sqlstat=null;
-        public static String querypost="select * from IRTAZA.POSTS";
-    private User_Account user;
+    private user user;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel jmsg;

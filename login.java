@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtableexp;
+package project3;
 
 /**
  *
@@ -52,10 +52,22 @@ public class login extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Log In");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
             }
         });
 
@@ -109,10 +121,10 @@ public class login extends javax.swing.JFrame {
         String username = jTextField1.getText();
         String password = jPasswordField1.getText();
         
-        String query = "SELECT * FROM LinkedIn_User where username = " + "'" + username + "'" + " and password = " + "'" + password + "'";
+        String query = "SELECT * FROM users where username = " + "'" + username + "'" + " and password = " + "'" + password + "'";
         
         try{
-            myconobj = DriverManager.getConnection("jdbc:derby://localhost:1527/FinalProject", "zee", "zee");
+            myconobj = DriverManager.getConnection("jdbc:derby://localhost:1527/connect", "zaid", "1234");
             mystatobj = myconobj.createStatement();
             myresobj = mystatobj.executeQuery(query);
             
@@ -140,6 +152,14 @@ public class login extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     
     

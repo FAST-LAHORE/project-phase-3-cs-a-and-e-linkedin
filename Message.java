@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project;
+package project3;
 
 /**
  *
- * @author Dell
+ * @author  ZAIN ASIM
  */
 public class Message {
     private String message;
